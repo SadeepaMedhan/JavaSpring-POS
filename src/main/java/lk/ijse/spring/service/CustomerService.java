@@ -1,13 +1,11 @@
 package lk.ijse.spring.service;
-
-import lk.ijse.spring.entity.Customer;
-
+import lk.ijse.spring.dto.CustomerDTO;
 import java.util.List;
 
 public interface CustomerService {
-    void saveCustomer(Customer entity);
+    void saveCustomer(CustomerDTO entity);
     void deleteCustomer(String id);
-    void updateCustomer(Customer entity);
-    Customer searchCustomer(String id);
-    List<Customer> getAllCustomers();
+    void updateCustomer(CustomerDTO entity);
+    CustomerDTO searchCustomer(String id);
+    List<CustomerDTO> getAllCustomers();
 }
