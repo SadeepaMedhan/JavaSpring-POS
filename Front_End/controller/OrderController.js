@@ -11,7 +11,7 @@ function loadAllCusID() {
     $("#inputCustomer").empty();
     $("#inputCustomer").append(`<option value="" disabled selected hidden>Select ID</option>`);
     $.ajax({
-        url: "http://localhost:8080/backendArtifact/customer?case=allID",
+        url: "http://localhost:8080/Spring_POS_war/customer?case=allID",
         method: "GET",
         success: function (resp) {
             for (let id of resp.data) {

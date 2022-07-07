@@ -12,7 +12,7 @@ function saveItem() {
         price: $("#txtItemPrice").val()
     }
     $.ajax({
-        url: "http://localhost:8080/backendArtifact/item",
+        url: "http://localhost:8080/Spring_POS_war/item",
         method: "POST",
         contentType: "application/json",
         data: JSON.stringify(item),
@@ -36,7 +36,7 @@ $('#btnUpdateItem').click(function () {
     }
     console.log(item);
     $.ajax({
-        url: "http://localhost:8080/backendArtifact/item",
+        url: "http://localhost:8080/Spring_POS_war/item",
         method: "PUT",
         contentType: "application/json",
         data: JSON.stringify(item),
@@ -56,7 +56,7 @@ $('#btnUpdateItem').click(function () {
 function loadAllItems() {
     $("#itemTable").empty();
     $.ajax({
-        url: "http://localhost:8080/backendArtifact/item?case=allItems",
+        url: "http://localhost:8080/Spring_POS_war/item?case=allItems",
         method: "GET",
         success: function (resp) {
             let x = 1;
@@ -72,7 +72,7 @@ $("#btnSearchItem").click(function () {
 
     var searchID = $("#txtSearchItem").val();
     $.ajax({
-        url: "http://localhost:8080/backendArtifact/item?case=getItem&id=" + searchID,
+        url: "http://localhost:8080/Spring_POS_war/item?case=getItem&id=" + searchID,
         method: "GET",
         success: function (res) {
             if (res.status == 200) {
@@ -93,7 +93,7 @@ $("#btnSearchItem").click(function () {
 $("#btnItemDelete").click(function () {
     var searchID = $("#txtSearchItem").val();
     $.ajax({
-        url: "http://localhost:8080/backendArtifact/item?id=" + searchID,
+        url: "http://localhost:8080/Spring_POS_war/item?id=" + searchID,
         method: "DELETE",
         success: function (resp) {
             if (resp.status == 200) {

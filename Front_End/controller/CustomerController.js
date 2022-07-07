@@ -11,7 +11,7 @@ $('#btnSaveCustomer').click(function () {
 function saveCus() {
     let serialize = $("#customerForm").serialize();
     $.ajax({
-        url: "http://localhost:8080/backendArtifact/customer",
+        url: "http://localhost:8080/Spring_POS_war/customer",
         method: "POST",
         data: serialize,
         success: function (resp) {
@@ -31,7 +31,7 @@ $("#btnUpdateCus").click(function () {
         contact: $("#txtCusTP").val()
     }
     $.ajax({
-        url: "http://localhost:8080/backendArtifact/customer",
+        url: "http://localhost:8080/Spring_POS_war/customer",
         method: "PUT",
         contentType: "application/json",
         data: JSON.stringify(customer),
@@ -52,7 +52,7 @@ $("#btnUpdateCus").click(function () {
 function loadAllCustomers() {
     $("#customerTable").empty();
     $.ajax({
-        url: "http://localhost:8080/backendArtifact/customer?case=allCus",
+        url: "http://localhost:8080/Spring_POS_war/customer?case=allCus",
         method: "GET",
         success: function (resp) {
             console.log(resp);
@@ -69,7 +69,7 @@ $("#btnSearchCus").click(function () {
     var searchID = $("#txtSearchCusID").val();
 
     $.ajax({
-        url: "http://localhost:8080/backendArtifact/customer?case=getCustomer&id=" + searchID,
+        url: "http://localhost:8080/Spring_POS_war/customer?case=getCustomer&id=" + searchID,
         method: "GET",
         success: function (res) {
             if (res.status == 200) {
@@ -91,7 +91,7 @@ $("#btnSearchCus").click(function () {
 
 $("#btnCusDelete").click(function () {
     $.ajax({
-        url: "http://localhost:8080/backendArtifact/customer?cusId=" + $("#txtCusID").val(),
+        url: "http://localhost:8080/Spring_POS_war/customer?cusId=" + $("#txtCusID").val(),
         method: "DELETE",
         success: function (resp) {
             if (resp.status == 200) {
@@ -133,11 +133,6 @@ $("#txtCusID").on('keyup', function (eventOb) {
 
     if (eventOb.key == "Control") {
         var typedCustomerID = $("#txtCusID").val();
-        // var srcCustomer = searchCustomer(typedCustomerID);
-        // $("#txtCusID").val(srcCustomer.getCustomerID());
-        // $("#txtCusName").val(srcCustomer.getCustomerName());
-        // $("#txtCusAddress").val(srcCustomer.getCustomerAddress());
-        // $("#txtCusTP").val(srcCustomer.getCustomerSalary());
     }
 });
 
