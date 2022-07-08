@@ -44,7 +44,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
             //update the item
             for (OrderDetails orderDetail : order.getOrderDetails()) {
                 Item item = itemRepo.findById(orderDetail.getItemCode()).get();
-                item.setQtyOnHand(item.getQtyOnHand() - orderDetail.getQty());
+                item.setQty(item.getQty() - orderDetail.getQty());
                 itemRepo.save(item);
             }
 
@@ -79,10 +79,10 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
                 int prevQty = previous.getQty();
                 if (newQty > prevQty) {
                     int dif = newQty - prevQty;
-                    item.setQtyOnHand(item.getQtyOnHand() - dif);
+                    item.setQty(item.getQty() - dif);
                 } else if (newQty < prevQty) {
                     int dif = prevQty - newQty;
-                    item.setQtyOnHand(item.getQtyOnHand() + dif);
+                    item.setQty(item.getQty() + dif);
                 }
                 itemRepo.save(item);
             }

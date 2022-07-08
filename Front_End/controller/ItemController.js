@@ -5,19 +5,14 @@ $('#btnSaveItem').click(function () {
 });
 
 function saveItem() {
-    let item = {
-        id: $("#txtItemCode").val(),
-        name: $("#txtItemName").val(),
-        qty: $("#txtItemQty").val(),
-        price: $("#txtItemPrice").val()
-    }
+   let item = $("#itemForm").serialize();
     $.ajax({
         url: "http://localhost:8080/Spring_POS_war/item",
         method: "POST",
-        contentType: "application/json",
-        data: JSON.stringify(item),
+        data: item,
         success: function (resp) {
-            if (resp.status == 200) {
+            if (resp.code == 200) {
+                console.log(resp);
                 //swal("Successful!", resp.message, "success");
                 loadAllItems();
             } else {
@@ -29,10 +24,10 @@ function saveItem() {
 
 $('#btnUpdateItem').click(function () {
     let item = {
-        id: $("#txtItemCode").val(),
-        name: $("#txtItemName").val(),
+        code: $("#txtItemCode").val(),
+        description: $("#txtItemName").val(),
         qty: $("#txtItemQty").val(),
-        price: $("#txtItemPrice").val()
+        unitPrice: $("#txtItemPrice").val()
     }
     console.log(item);
     $.ajax({
@@ -41,7 +36,7 @@ $('#btnUpdateItem').click(function () {
         contentType: "application/json",
         data: JSON.stringify(item),
         success: function (resp) {
-            if (resp.status == 200) {
+            if (resp.code == 200) {
 
                 console.log(resp);
                 //swal("Successful!", resp.message, "success");
@@ -56,12 +51,12 @@ $('#btnUpdateItem').click(function () {
 function loadAllItems() {
     $("#itemTable").empty();
     $.ajax({
-        url: "http://localhost:8080/Spring_POS_war/item?case=allItems",
+        url: "http://localhost:8080/Spring_POS_war/item",
         method: "GET",
         success: function (resp) {
             let x = 1;
             for (const i of resp.data) {
-                let row = `<tr><td>${i.id}</td><td>${i.name}</td><td>${i.qty}</td><td>${i.price}</td></tr>`;
+                let row = `<tr><td>${i.code}</td><td>${i.description}</td><td>${i.qty}</td><td>${i.unitPrice}</td></tr>`;
                 $("#itemTable").append(row);
             }
         }
@@ -69,20 +64,19 @@ function loadAllItems() {
 }
 
 $("#btnSearchItem").click(function () {
-
     var searchID = $("#txtSearchItem").val();
     $.ajax({
-        url: "http://localhost:8080/Spring_POS_war/item?case=getItem&id=" + searchID,
+        url: "http://localhost:8080/Spring_POS_war/item/" + searchID,
         method: "GET",
         success: function (res) {
-            if (res.status == 200) {
+            if (res.code == 200) {
                 $("#addNewItemModal").modal('show');
                     console.log(res);
 
-                    $("#txtItemCode").val(res.data.id);
-                    $("#txtItemName").val(res.data.name);
+                    $("#txtItemCode").val(res.data.code);
+                    $("#txtItemName").val(res.data.description);
                     $("#txtItemQty").val(res.data.qty);
-                    $("#txtItemPrice").val(res.data.price);
+                    $("#txtItemPrice").val(res.data.unitPrice);
             } else {
                 //swal("Unsuccessful!", res.message, "error");
             }
@@ -93,10 +87,10 @@ $("#btnSearchItem").click(function () {
 $("#btnItemDelete").click(function () {
     var searchID = $("#txtSearchItem").val();
     $.ajax({
-        url: "http://localhost:8080/Spring_POS_war/item?id=" + searchID,
+        url: "http://localhost:8080/Spring_POS_war/item?code=" + searchID,
         method: "DELETE",
         success: function (resp) {
-            if (resp.status == 200) {
+            if (resp.code == 200) {
                 //swal("Successful!", resp.message, "success");
                 loadAllItems();
             } else {

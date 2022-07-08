@@ -8,16 +8,16 @@ public class Item {
     @Id
     private String code;
     private String description;
-    private int qtyOnHand;
+    private int qty;
     private double unitPrice;
 
     public Item() {
     }
 
-    public Item(String code, String description, int qtyOnHand, double unitPrice) {
+    public Item(String code, String description, int qty, double unitPrice) {
         this.code = code;
         this.description = description;
-        this.qtyOnHand = qtyOnHand;
+        this.qty = qty;
         this.unitPrice = unitPrice;
     }
 
@@ -37,12 +37,12 @@ public class Item {
         this.description = description;
     }
 
-    public int getQtyOnHand() {
-        return qtyOnHand;
+    public int getQty() {
+        return qty;
     }
 
-    public void setQtyOnHand(int qtyOnHand) {
-        this.qtyOnHand = qtyOnHand;
+    public void setQty(int qty) {
+        this.qty = qty;
     }
 
     public double getUnitPrice() {
@@ -58,7 +58,7 @@ public class Item {
         final StringBuffer sb = new StringBuffer("Item{");
         sb.append("code='").append(code).append('\'');
         sb.append(", description='").append(description).append('\'');
-        sb.append(", qtyOnHand=").append(qtyOnHand);
+        sb.append(", qty=").append(qty);
         sb.append(", unitPrice=").append(unitPrice);
         sb.append('}');
         return sb.toString();

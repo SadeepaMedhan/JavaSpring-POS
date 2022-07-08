@@ -12,6 +12,6 @@ import lombok.ToString;
 public class ItemDTO {
     private String code;
     private String description;
-    private int qtyOnHand;
+    private int qty;
     private double unitPrice;
 }

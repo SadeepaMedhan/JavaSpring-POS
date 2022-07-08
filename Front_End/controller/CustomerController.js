@@ -36,7 +36,7 @@ $("#btnUpdateCus").click(function () {
         contentType: "application/json",
         data: JSON.stringify(customer),
         success: function (resp) {
-            if (resp.status == 200) {
+            if (resp.code == 200) {
                 //swal("Successful!", resp.message, "success");
                 loadAllCustomers();
                 $('#txtSearchCusID').val("")
@@ -94,10 +94,10 @@ $("#btnSearchCus").click(function () {
 
 $("#btnCusDelete").click(function () {
     $.ajax({
-        url: "http://localhost:8080/Spring_POS_war/customer?cusId=" + $("#txtCusID").val(),
+        url: "http://localhost:8080/Spring_POS_war/customer?id=" + $("#txtCusID").val(),
         method: "DELETE",
         success: function (resp) {
-            if (resp.status == 200) {
+            if (resp.code == 200) {
                 //swal("Successful!", resp.message, "success");
                 loadAllCustomers();
                 $('#txtSearchCusID').val("")
