@@ -52,7 +52,7 @@ $("#btnUpdateCus").click(function () {
 function loadAllCustomers() {
     $("#customerTable").empty();
     $.ajax({
-        url: "http://localhost:8080/Spring_POS_war/customer?case=allCus",
+        url: "http://localhost:8080/Spring_POS_war/customer",
         method: "GET",
         success: function (resp) {
             console.log(resp);
@@ -60,6 +60,9 @@ function loadAllCustomers() {
                 let row = `<tr><td>${i.id}</td><td>${i.name}</td><td>${i.address}</td><td>${i.contact}</td></tr>`;
                 $("#customerTable").append(row);
             }
+        },
+        error: function (ob) {
+            alert(ob.responseJSON.message);
         }
     });
 }
@@ -69,10 +72,10 @@ $("#btnSearchCus").click(function () {
     var searchID = $("#txtSearchCusID").val();
 
     $.ajax({
-        url: "http://localhost:8080/Spring_POS_war/customer?case=getCustomer&id=" + searchID,
+        url: "http://localhost:8080/Spring_POS_war/customer/" + searchID,
         method: "GET",
         success: function (res) {
-            if (res.status == 200) {
+            if (res.code == 200) {
                 $("#cusDetailPopup").modal('show');
                 console.log(res);
 

@@ -24,7 +24,7 @@ function loadAllCusID() {
 
 function loadCusDetails(id) {
     $.ajax({
-        url: "http://localhost:8080/backendArtifact/customer?case=getCustomer&id=" + id,
+        url: "http://localhost:8080/Spring_POS_war/customer?case=getCustomer&id=" + id,
         method: "GET",
         success: function (resp) {
             $("#txtOrderCusID").val(resp.data.id);
@@ -46,7 +46,7 @@ function loadAllItemID() {
     $("#inputItem").empty();
     $("#inputItem").append(`<option value="" disabled selected hidden>Select ID</option>`);
     $.ajax({
-        url: "http://localhost:8080/backendArtifact/item?case=allID",
+        url: "http://localhost:8080/Spring_POS_war/item?case=allID",
         method: "GET",
         success: function (resp) {
             for (let id of resp.data) {
@@ -59,7 +59,7 @@ function loadAllItemID() {
 
 function loadItemDetails(id) {
     $.ajax({
-        url: "http://localhost:8080/backendArtifact/item?case=getItem&id=" + id,
+        url: "http://localhost:8080/Spring_POS_war/item?case=getItem&id=" + id,
         method: "GET",
         success: function (res) {
             $("#txtOrderItemCode").val(res.data.id);
@@ -165,7 +165,7 @@ $("#btnPurchase").click(function () {
     }
 
     $.ajax({
-        url: "http://localhost:8080/backendArtifact/order",
+        url: "http://localhost:8080/Spring_POS_war/purchase_Order",
         method: "POST",
         contentType: "application/json",
         data: JSON.stringify(order),
